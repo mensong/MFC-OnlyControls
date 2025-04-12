@@ -20,8 +20,19 @@
 
 COnlyControlsDlg::COnlyControlsDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_ONLYCONTROLS_DIALOG, pParent)
+	, m_pDlg(NULL)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+}
+
+COnlyControlsDlg::~COnlyControlsDlg()
+{
+	if (m_pDlg)
+	{
+		m_pDlg->DestroyWindow();
+		delete m_pDlg;
+		m_pDlg = NULL;
+	}
 }
 
 void COnlyControlsDlg::DoDataExchange(CDataExchange* pDX)
@@ -92,7 +103,14 @@ HCURSOR COnlyControlsDlg::OnQueryDragIcon()
 
 void COnlyControlsDlg::OnBnClickedButton1()
 {
-	CDlgTest* pDlg = new CDlgTest(this);
-	pDlg->Create(IDD_DIALOG1, this);
-	pDlg->ShowWindow(SW_SHOW);
+	if (m_pDlg)
+	{
+		m_pDlg->DestroyWindow();
+		delete m_pDlg;
+		m_pDlg = NULL;
+	}
+
+	m_pDlg = new CDlgTest(this);
+	m_pDlg->Create(IDD_DIALOG1, this);
+	m_pDlg->ShowWindow(SW_SHOW);
 }

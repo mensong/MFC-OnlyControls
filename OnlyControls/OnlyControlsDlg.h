@@ -12,6 +12,7 @@ class COnlyControlsDlg : public CDialogEx
 // 构造
 public:
 	COnlyControlsDlg(CWnd* pParent = nullptr);	// 标准构造函数
+	~COnlyControlsDlg();
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
@@ -21,6 +22,7 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
 
+	class CDlgTest* m_pDlg;
 
 // 实现
 protected:
